@@ -2,6 +2,27 @@ const BASE_URL = "http://localhost:3001/api/videos";
 const TOKEN = sessionStorage.getItem("token");
 
 /**
+ * 
+ * @param {string} url 
+ * @returns Objet
+ */
+const modifyPlaylist = (playlist) => {
+    playlist.forEach(video => {
+        // Extraer el ID del video de la URL de YouTube
+        let videoId = video.url.split('v=')[1];
+        let ampersandPosition = videoId.indexOf('&');
+        if (ampersandPosition !== -1) {
+            videoId = videoId.substring(0, ampersandPosition);
+        }
+
+        video.url = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&loop=1&playlist=' + videoId;
+        video.img = 'http://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg';
+    });
+
+    return playlist;
+}
+
+/**
  * Fetch one video or the playlist from the server.
  * @param {string} id - Optional video ID to fetch a specific video.
  * @returns {Promise} - Promise object represents the videos data.
@@ -21,12 +42,17 @@ const get = (id) => {
                 "authorization": `Bearer ${TOKEN}`
             }
         })
-        .then(response => {
-            resolve(response.data);
-        })
-        .catch((error) => {
-            reject(error.response);
-        });
+            .then(response => {
+                if (id) {
+                    resolve(response.data);
+                }
+                else {
+                    resolve(modifyPlaylist(response.data));
+                }
+            })
+            .catch((error) => {
+                reject(error.response);
+            });
     });
 }
 
@@ -54,12 +80,12 @@ const save = (data) => {
                 "authorization": `Bearer ${TOKEN}`
             }
         })
-        .then(response => {
-            resolve(true);
-        })
-        .catch(error => {
-            reject(error.response);
-        });
+            .then(response => {
+                resolve(true);
+            })
+            .catch(error => {
+                reject(error.response);
+            });
     });
 }
 
@@ -80,11 +106,11 @@ const deletevideo = (id) => {
                 "authorization": `Bearer ${TOKEN}`
             }
         })
-        .then(response => {
-            resolve(true);
-        })
-        .catch(error => {
-            reject(error.response);
-        });
+            .then(response => {
+                resolve(true);
+            })
+            .catch(error => {
+                reject(error.response);
+            });
     });
 }
