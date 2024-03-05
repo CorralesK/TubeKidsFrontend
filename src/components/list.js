@@ -1,13 +1,11 @@
-const container = document.getElementById('container');
-
 /**
  * Renders a list of profiles in a given container.
  * @param {Object[]} profiles - Array of profiles to render.
  */
-const renderList = (profiles) => {
+const renderProfiles = (profiles) => {
     // Create a session element to contain profiles
     const session = document.createElement('div');
-    session.className = "row justify-content-center align-items-center text-center pt-4 mt-4 profiles";
+    session.className = "row justify-content-center align-items-center text-center pt-4 mt-4";
 
     // Iterate through each profile and create profile elements
     profiles.forEach(profile => {
@@ -43,35 +41,42 @@ const renderList = (profiles) => {
 }
 
 /**
- * Renders a session with a title and an optional message.
- * @param {string} title - Title of the session.
+ * Renders a list of playlist in a given container.
+ * @param {Object[]} playlist - Array of playlist to render.
  */
-const renderHeader = (title) => {
-    // Create a session element for the header
+const renderPlaylist = (playlist) => {
+    // Create a session element to contain playlist
     const session = document.createElement('div');
-    session.className = "row justify-content-center align-items-center text-center pt-5 mt-5";
-    session.id = "headerSession";
+    session.className = "row justify-content-center align-items-center pt-4 mt-4";
 
-    // Create an inner div for the content
-    const innerDiv = document.createElement('div');
-    innerDiv.className = "col-md-6";
+    // Iterate through each video and create video elements
+    playlist.forEach(video => {
+        const div = document.createElement('div');
+        div.className = "col-md-4 col-sm-4 pb-2";
 
-    // Create title element and add it to inner div
-    const titleSession = document.createElement('h2');
-    titleSession.textContent = title;
-    innerDiv.appendChild(titleSession);
+        const card = document.createElement('div');
+        card.className = "card bg-dark text-light";
 
-    // Create message paragraph if applicable and add it to inner div
-    const messageParagraph = document.createElement('p');
-    messageParagraph.className = 'text-info';
-    messageParagraph.id = 'message';
-    messageParagraph.textContent = "No hay perfiles registrados para esta cuenta, para comenzar registre uno!!!";
-    messageParagraph.style.display = 'none'; // Initially hidden
-    innerDiv.appendChild(messageParagraph);
+        const link = document.createElement('a');
+        link.href = video.url;
+        
+        const img = document.createElement('img');
+        img.src = video.img;
+        img.alt = "Miniatura del video";
+        img.className = 'card-img-top';
 
-    // Append inner div to session
-    session.appendChild(innerDiv);
+        link.appendChild(img);
 
-    // Append session to the main container
+        const nameVideo =  document.createElement('h5');
+        nameVideo.className = "card-title mt-2";
+        nameVideo.textContent = video.name;
+
+        link.appendChild(nameVideo);
+        card.appendChild(link);
+        div.appendChild(card);
+
+        session.appendChild(div);
+    });
+    // Append the session containing playlist to the main container
     container.appendChild(session);
 }

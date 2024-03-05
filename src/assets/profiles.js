@@ -19,11 +19,12 @@ if (context == "home") {
         renderModal();
         await get()
             .then(profiles => {
-                renderList(profiles);
+                renderProfiles(profiles);
             })
             .catch(error => {
                 if (error.status == 404) {
-                    document.getElementById("message").style.display = 'block';
+                    document.getElementById("message").style.display = 'block'
+                        .textContent = "No hay perfiles registrados para esta cuenta, para comenzar registre uno!!!";
                 } else {
                     errorContainer.innerHTML = '<div class="alert alert-danger"> Algo ha salido mal. Vuelva a intentarlo más tarde. </div>';
                 }
@@ -41,22 +42,26 @@ if (context == "home") {
         const pin = parseInt(document.getElementById("pin").value);
         const target = document.querySelector('[data-bs-target="#staticBackdrop"]');
         const action = target.getAttribute('data-action');
-    
+
         const handleError = () => document.getElementById('error-pin').style.display = 'block';
-        const redirectToPlaylist = () => document.location.href = "./videos/playlist.html";
-    
+        const redirectToPlaylist = "./videos/playlist.html";
+
         if (action === 'profile') {
             const profileId = target.getAttribute('data-profile-id');
             verifyPin(profileId, pin)
-                .then(redirectToPlaylist)
+                .then(() => {
+                    document.location.href = redirectToPlaylist + "?context=playlist";
+                })
                 .catch(handleError);
         } else if (action === 'admin') {
             verifyPinAdmin(pin)
-                .then(redirectToPlaylist)
+                .then(() => {
+                    document.location.href = redirectToPlaylist + "?context=videos";
+                })
                 .catch((error) => {
                     console.log(error);
                     handleError();
                 });
         }
-    });    
+    });
 }
