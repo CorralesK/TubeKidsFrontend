@@ -1,5 +1,4 @@
 const container = document.getElementById('container');
-const errorContainer = document.getElementById('error-container');
 
 /**
  * Renders a session with a title and an optional message.
@@ -18,13 +17,14 @@ const renderHeader = (title) => {
     // Create title element and add it to inner div
     const titleSession = document.createElement('h2');
     titleSession.textContent = title;
+    titleSession.id  = 'sessionTitle';
     innerDiv.appendChild(titleSession);
 
     // Create message paragraph if applicable and add it to inner div
     const messageParagraph = document.createElement('p');
     messageParagraph.className = 'text-info';
     messageParagraph.id = 'message';
-    messageParagraph.style.display = 'none'; // Initially hidden
+    messageParagraph.style.display = 'none';
     innerDiv.appendChild(messageParagraph);
 
     // Append inner div to session

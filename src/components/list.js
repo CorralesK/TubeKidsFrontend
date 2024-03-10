@@ -10,7 +10,7 @@ const renderProfiles = (profiles) => {
     // Iterate through each profile and create profile elements
     profiles.forEach(profile => {
         const profileDiv = document.createElement('div');
-        profileDiv.className = "col-md-4 col-sm-4 col-xl-4 col-lg-2 pb-2 text-center";
+        profileDiv.className = "col-md-4 col-sm-4 col-xl-4 col-lg-2 pb-2 text-center profile";
 
         const button = document.createElement('button');
         button.className = "btn";
@@ -55,20 +55,23 @@ const renderPlaylist = (playlist) => {
         div.className = "col-md-4 col-sm-4 pb-2";
 
         const card = document.createElement('div');
-        card.className = "card bg-dark text-light";
+        card.className = "card bg-dark text-light card-video";
+        card.setAttribute("data-video-id", video._id);
 
         const link = document.createElement('a');
         link.href = video.url;
+        link.className = 'btn-dark';
         
         const img = document.createElement('img');
         img.src = video.img;
         img.alt = "Miniatura del video";
         img.className = 'card-img-top';
+        img.height = '180';
 
         link.appendChild(img);
 
-        const nameVideo =  document.createElement('h5');
-        nameVideo.className = "card-title mt-2";
+        const nameVideo =  document.createElement('h4');
+        nameVideo.className = "card-title nav-link mt-2 px-2 link-light";
         nameVideo.textContent = video.name;
 
         link.appendChild(nameVideo);

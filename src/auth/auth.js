@@ -1,10 +1,22 @@
-const URLUSER = "http://localhost:3001/api/users";
+const URLUSER = "http://localhost:3001/api";
 
 const errorContainer = document.getElementById('error-container');
-const context = document.getElementById("context").value;
+
+/**
+ * Extracts the context identifier ('c') from the query parameters of the current URL.
+ *
+ * @returns {string|null} The context identifier ('c') or `null` if not found.
+ */
+const getContext = () => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    return params.get('c');
+}
+
+const context = getContext();
 
 // Sign up
-if (context == 'signup') {
+if (context == 's') {
     /**
     * Fetches the list of all countries from the API, sorts them alphabetically, and populates them in the select dropdown.
     */
@@ -90,9 +102,11 @@ if (context == 'signup') {
             dateOfBirth: document.getElementById('date-birth').value,
         };
 
+        const url = URLUSER + '/users';
+
         axios({
             method: "POST",
-            url: URLUSER,
+            url: url,
             data: data,
             headers: {
                 "Content-Type": "application/json"
@@ -100,7 +114,7 @@ if (context == 'signup') {
         })
             .then(response => {
                 sessionStorage.setItem('token', response.data);
-                document.location.href = "../index.html";
+                document.location.href = "http://127.0.0.1:5500/html/index.html?c=1";
             })
             .catch(error);
     });
@@ -108,7 +122,7 @@ if (context == 'signup') {
 }
 
 // Login
-if (context == 'login') {
+if (!context) {
     /**
      *  Event listener for user login.
      */
@@ -120,17 +134,19 @@ if (context == 'login') {
             password: document.getElementById('password').value
         };
 
+        const url = URLUSER + "/session"
+
         axios({
-            method: "GET",
-            url: URLUSER,
-            params: data,
+            method: "POST",
+            url: url,
+            data: data,
             headers: {
                 "Content-Type": "application/json"
             }
         })
             .then(response => {
                 sessionStorage.setItem('token', response.data);
-                document.location.href = "../index.html";
+                document.location.href = "http://127.0.0.1:5500/html/index.html?c=1";
             })
             .catch(error);
     });

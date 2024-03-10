@@ -94,7 +94,7 @@ const save = (data) => {
  * @param {string} id - ID of the video to be deleted.
  * @returns {Promise} - Promise object represents the success of the operation.
  */
-const deletevideo = (id) => {
+const deleteVideo = (id) => {
     return new Promise((resolve, reject) => {
         const url = `${BASE_URL}?_id=${id}`;
 
