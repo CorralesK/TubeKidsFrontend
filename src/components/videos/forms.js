@@ -1,39 +1,15 @@
-/**
- * 
- * @param {*} idProfile 
- */
-const renderFormProfile  = (idProfile) => {
-    if (idProfile) {
-        
-    }
-}
-
-/**
- * 
- * @param {*} data 
- */
-const loadProfile = (data) => {
-    document.getElementById('title').textContent = "Editar perfil";
-
-    document.getElementById('name').value = data.name;
-    document.getElementById('pin').value = data.code;
-    document.getElementById('avatar').value = data.description;
-    document.getElementById('age').value = data.age;
-
-    document.getElementById('save-btn').setAttribute('data-id', `'${data._id}'`);
-}
 
 /**
  * Generates and appends the video form to the container.
  */
-const renderFormVideo = ()  => {
+const renderFormVideo = () => {
     const session = document.createElement('div');
     session.className = "row justify-content-center align-items-center mt-5";
 
     const div = document.createElement('div');
     div.className = "col-md-6";
 
-    const formVideo = document.createElement( 'form' );
+    const formVideo = document.createElement('form');
     formVideo.id = "video-form";
 
     //Create session of  video name
@@ -47,7 +23,7 @@ const renderFormVideo = ()  => {
 
     sessionName.appendChild(labelName);
 
-    const inputName =  document.createElement('input');
+    const inputName = document.createElement('input');
     inputName.type = "text";
     inputName.className = "form-control bg-dark text-light";
     inputName.placeholder = "Ingrese el nombre del video";
@@ -56,7 +32,7 @@ const renderFormVideo = ()  => {
 
     sessionName.appendChild(inputName);
     formVideo.appendChild(sessionName);
-    
+
     //Create session of  video url
     const sessionURL = document.createElement('div');
     sessionURL.className = "mb-3";
@@ -68,7 +44,7 @@ const renderFormVideo = ()  => {
 
     sessionURL.appendChild(labelURL);
 
-    const inputURL =  document.createElement('input');
+    const inputURL = document.createElement('input');
     inputURL.type = "url";
     inputURL.className = "form-control bg-dark text-light";
     inputURL.placeholder = "Ingrese la url del video";
@@ -76,22 +52,31 @@ const renderFormVideo = ()  => {
     inputURL.id = "url";
 
     sessionURL.appendChild(inputURL);
+
+    //Menssage error
+    const  messageError = document.createElement('p');
+    messageError.className = "text-danger";
+    messageError.style.display="none";
+    messageError.id ="urlError"
+    messageError.innerText = "Solo  se permiten URL de YouTube.";
+    sessionURL.appendChild(messageError);
+
     formVideo.appendChild(sessionURL);
 
     //Create the button of cancel and redirect to playlist page
     const btnCancel = document.createElement('a');
-    btnCancel.href="http://127.0.0.1:5500/html/videos/playlist.html?c=v";
+    btnCancel.href = "http://127.0.0.1:5500/html/videos/playlist.html?c=v";
     btnCancel.className = "btn btn-secondary me-2";
     btnCancel.type = "button";
     btnCancel.innerText = "Volver";
     formVideo.appendChild(btnCancel);
 
     //Create  the button of submit and add it to the form
-    const  btnAddVideo = document.createElement('button');
-    btnAddVideo.type="submit";
-    btnAddVideo.className= "btn btn-success"
+    const btnAddVideo = document.createElement('button');
+    btnAddVideo.type = "submit";
+    btnAddVideo.className = "btn btn-success"
     btnAddVideo.id = "save-btn";
-    btnAddVideo.innerText  = "Guardar";
+    btnAddVideo.innerText = "Guardar";
 
     formVideo.appendChild(btnAddVideo);
 
@@ -112,5 +97,5 @@ const loadVideo = (data) => {
     document.getElementById('name').value = data.name;
     document.getElementById('url').value = data.url;
 
-    document.getElementById('save-btn').setAttribute('data-id', `'${data._id}'`);
+    document.getElementById('save-btn').setAttribute('data-id', `${data._id}`);
 }
