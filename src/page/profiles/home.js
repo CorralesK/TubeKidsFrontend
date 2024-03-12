@@ -1,9 +1,24 @@
+const errorContainer = document.getElementById('error-container');
+
 /**
  * Check if there is an active session token stored in sessionStorage. If not, redirect the user to the login page.
  */
 if (sessionStorage.getItem("token") == null) {
     window.location.href = "http://127.0.0.1:5500/html/auth/login.html";
 }
+
+/**
+ * Extracts the context identifier ('c') from the query parameters of the current URL.
+ *
+ * @returns {string|null} The context identifier ('c') or `null` if not found.
+ */
+const getContext = () => {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    return params.get('c');
+}
+
+const context = getContext();
 
 /**
  * If the current context is the home page:
@@ -34,27 +49,21 @@ if (context == "1") {
 
     showHomePage();
 
-    /**
-     * Event listener for the submission of the PIN modal form, handling PIN verification for profile or admin actions.
-     */
+    // Event listener para el envío del formulario del modal
     document.getElementById("modal-pin").addEventListener('submit', (event) => {
         event.preventDefault();
         const pin = parseInt(document.getElementById("pin").value);
-        const target = document.querySelector('[data-bs-target="#staticBackdrop"]');
-        const action = target.getAttribute('data-action');
 
         const handleError = () => document.getElementById('error-pin').style.display = 'block';
         const redirectToPlaylist = "http://127.0.0.1:5500/html/videos/playlist.html";
 
-        //Error que arreglar
-        if (action === 'profile') {
-            const profileId = target.getAttribute('data-profile-id');
-            verifyPin(profileId, pin)
+        if (ACTION === 'profile') {
+            verifyPin(PROFILE_ID, pin)
                 .then(() => {
                     document.location.href = redirectToPlaylist + "?c=p";
                 })
                 .catch(handleError);
-        } else if (action === 'admin') {
+        } else if (ACTION === 'admin') {
             verifyPinAdmin(pin)
                 .then(() => {
                     document.location.href = redirectToPlaylist + "?c=v";
@@ -64,5 +73,15 @@ if (context == "1") {
                     handleError();
                 });
         }
+        document.getElementById("pin").value = "";
     });
+}
+
+//
+let ACTION;
+let PROFILE_ID;
+
+const setAction = (action,  profileId) => {
+    ACTION = action;
+    PROFILE_ID = profileId;
 }

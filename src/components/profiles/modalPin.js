@@ -26,14 +26,14 @@ const renderModal = () => {
 
     // Create modal title
     const modalTitle = document.createElement('h1');
-    modalTitle.className = "modal-title fs-5 text-white";
+    modalTitle.className = "modal-title fs-5 text-light";
     modalTitle.id = "exampleModalLabel";
     modalTitle.textContent = "Escribe tu PIN para acceder";
 
     // Create close button for modal
     const closeButton = document.createElement('button');
     closeButton.type = "button";
-    closeButton.className = "btn-close text-white";
+    closeButton.className = "btn-close text-light";
     closeButton.setAttribute('data-bs-dismiss', 'modal');
     closeButton.setAttribute('aria-label', 'Close');
 
@@ -86,7 +86,7 @@ const renderModal = () => {
     // Create submit button for modal footer
     const submitButton = document.createElement('button');
     submitButton.type = "submit";
-    submitButton.className = "btn btn-primary";
+    submitButton.className = "btn btn-info";
     submitButton.textContent = "Ingresar";
 
     modalFooter.appendChild(closeButtonModal);

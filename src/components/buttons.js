@@ -2,9 +2,9 @@
  * Render a button to manage the main account.
  */
 const renderManagerButton = () => {
-    // Create a session element for the manager button
-    const session = document.createElement('div');
-    session.className = "row justify-content-center align-items-center text-center pt-5 mt-5";
+    // Create a section element for the manager button
+    const section = document.createElement('div');
+    section.className = "row justify-content-center align-items-center text-center pt-5 mt-5";
 
     // Create an inner div for the content
     const innerDiv = document.createElement('div');
@@ -16,15 +16,15 @@ const renderManagerButton = () => {
     button.id = "manager-account";
     button.setAttribute('data-bs-toggle', 'modal');
     button.setAttribute('data-bs-target', '#staticBackdrop');
-    button.setAttribute("data-action", "admin");
+    button.setAttribute("onclick", "setAction('admin')");
     button.textContent = "Administrar cuenta";
     innerDiv.appendChild(button);
 
-    // Append inner div to session
-    session.appendChild(innerDiv);
+    // Append inner div to section
+    section.appendChild(innerDiv);
 
-    // Append session to the main container
-    container.appendChild(session);
+    // Append section to the main container
+    container.appendChild(section);
 }
 
 /**
@@ -43,7 +43,7 @@ const renderEditDeleteButtons = (id) => {
     editButton.setAttribute('data-bs-toggle', 'tooltip');
     editButton.setAttribute('data-bs-placement', 'top');
     editButton.setAttribute('data-bs-title', 'Editar');
-    editButton.setAttribute('onclick',  `redirectEdit('${id}')`);
+    editButton.setAttribute('onclick', `redirectEdit('${id}')`);
 
     const editIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     editIcon.setAttribute('width', '16');
@@ -64,7 +64,7 @@ const renderEditDeleteButtons = (id) => {
     deleteButton.setAttribute('data-bs-toggle', 'tooltip');
     deleteButton.setAttribute('data-bs-placement', 'top');
     deleteButton.setAttribute('data-bs-title', 'Eliminar');
-    deleteButton.setAttribute('onclick',  `deleteElement('${id}')`) ;
+    deleteButton.setAttribute('onclick', `deleteElement('${id}')`);
 
     const deleteIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     deleteIcon.setAttribute('width', '16');
@@ -79,7 +79,7 @@ const renderEditDeleteButtons = (id) => {
     deleteIcon.appendChild(deletePath);
     deleteButton.appendChild(deleteIcon);
 
-    // Append inner div to session
+    // Append inner div to section
     buttonContainer.append(editButton, deleteButton);
 
     return buttonContainer;
@@ -89,22 +89,72 @@ const renderEditDeleteButtons = (id) => {
  * Creates and appends a button to add a video.
  */
 const renderAddVideoButton = () => {
-    // Create a session element for the manager button
-    const session = document.createElement('div');
-    session.className = "d-flex justify-content-end";
+    // Create a section element for the manager button
+    const section = document.createElement('div');
+    section.className = "d-flex justify-content-end";
 
     // Create the add button
-    const button = document.createElement('button');
+    const button = document.createElement('a');
     button.className = "btn btn-outline-success";
     button.id = "add-btn";
-    button.setAttribute('data-bs-toggle', 'modal');
-    button.setAttribute('data-bs-target', '#staticBackdrop');
-    button.setAttribute("data-action", "admin");
+    button.href = "http://127.0.0.1:5500/html/videos/playlist.html?c=f";
     button.textContent = "Añadir  video";
 
-    // Append button to session
-    session.appendChild(button);
+    // Append button to section
+    section.appendChild(button);
 
-    // Append session to the main container
-    container.appendChild(session);
+    // Append section to the main container
+    container.appendChild(section);
+}
+
+const renderAddProfileButton = () => {
+    //Create container
+    const profileDiv = document.createElement('div');
+    profileDiv.className = "col-md-4 col-sm-4 col-xl-2 col-lg-2 pb-2 text-center justify-content-center add-btn-container";
+
+    //Create button
+    const button = document.createElement('a');
+    button.className = "btn btn-dark add-btn mb-1 pt-1";
+    button.href = "http://127.0.0.1:5500/html/index.html?c=f";
+    button.setAttribute('data-bs-toggle', 'tooltip');
+    button.setAttribute('data-bs-placement', 'top');
+    button.setAttribute('data-bs-title', 'Añadir');
+
+    //Create icon and add to button
+    const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    icon.setAttribute('width', '100');
+    icon.setAttribute('height', '100');
+    icon.setAttribute('fill', 'currentColor');
+    icon.setAttribute('viewBox', '0 0 16 16');
+    icon.classList.add('bi', 'bi-plus-square-fill', 'text-secondary', 'mb-4');
+
+    const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    iconPath.setAttribute('d', "M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z");
+
+    // Append buttons to card footer
+    icon.appendChild(iconPath);
+    button.appendChild(icon);
+
+    profileDiv.appendChild(button);
+
+    const text = document.createElement('h4');
+    text.textContent = "Añadir";
+
+    profileDiv.appendChild(text);
+
+    const section = document.getElementById('profile-container');
+    if (section == null) {
+        const section = document.createElement('div');
+        section.className = "row justify-content-center align-items-center text-center pt-4 mt-4";
+        section.id =  "profile-container";
+
+        section.appendChild(profileDiv);
+        container.appendChild(section);
+        console.log("no");
+        return;
+    }
+
+    console.log("se");
+    section.appendChild(profileDiv);
+    container.appendChild(section);
 }
