@@ -103,5 +103,5 @@ const renderModal = () => {
     modal.appendChild(modalDialog);
 
     // Append modal to the header session element
-    document.getElementById("headerSession").appendChild(modal);
+    document.getElementById("headerSection").appendChild(modal);
 }

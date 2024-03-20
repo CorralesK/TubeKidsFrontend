@@ -47,7 +47,8 @@ const renderFormProfile = () => {
     // Input name
     const inputName = document.createElement('input');
     inputName.type = 'text';
-    inputName.className = 'form-control bg-dark text-light';
+    inputName.className = 'form-control bg-transparent text-light';
+    inputName.placeholder = "Ingrese el nombre";
     inputName.id = 'name';
     inputName.required = true;
     nameSection.appendChild(inputName);
@@ -68,7 +69,8 @@ const renderFormProfile = () => {
     // Input pin
     const inputPin = document.createElement('input');
     inputPin.type = 'number';
-    inputPin.className = 'form-control bg-dark text-light';
+    inputPin.className = 'form-control bg-transparent text-light';
+    inputPin.placeholder = "Ingrese el pin";
     inputPin.id = 'pin';
     inputPin.required = true;
     inputPin.minLength = 6;
@@ -98,7 +100,8 @@ const renderFormProfile = () => {
     // Input age
     const inputAge = document.createElement('input');
     inputAge.type = 'number';
-    inputAge.className = 'form-control bg-dark text-light';
+    inputAge.className = 'form-control bg-transparent text-light';
+    inputAge.placeholder = "Ingrese la edad";
     inputAge.id = 'age';
     ageSection.appendChild(inputAge);
 
@@ -111,7 +114,7 @@ const renderFormProfile = () => {
     // Create the cancel button and redirect to the playlist page
     const btnCancel = document.createElement('a');
     btnCancel.href = "http://127.0.0.1:5500/html/index.html?c=a";
-    btnCancel.className = "btn btn-secondary me-2";
+    btnCancel.className = "btn btn-outline-secondary me-2";
     btnCancel.type = "button";
     btnCancel.innerText = "Volver";
     form.appendChild(btnCancel);
@@ -119,7 +122,7 @@ const renderFormProfile = () => {
     // Create the submit button and add it to the form
     const btnAdd = document.createElement('button');
     btnAdd.type = "submit";
-    btnAdd.className = "btn btn-success";
+    btnAdd.className = "btn btn-outline-success";
     btnAdd.id = "save-btn";
     btnAdd.innerText = "Guardar";
     form.appendChild(btnAdd);
@@ -136,7 +139,7 @@ const renderFormProfile = () => {
  * @param {*} data - Profile data to be loaded into the form.
  */
 const loadProfile = (data) => {
-    document.getElementById('sessionTitle').textContent = "Edit Profile";
+    document.getElementById('sectionTitle').textContent = "Edit Profile";
 
     document.getElementById('name').value = data.name;
     document.getElementById('pin').value = data.pin;

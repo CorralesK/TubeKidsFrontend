@@ -3,10 +3,10 @@
  * @param {Object[]} profiles - Array of profiles to render.
  */
 const renderProfiles = (profiles) => {
-    // Create a session element to contain profiles
-    const session = document.createElement('div');
-    session.className = "row justify-content-center align-items-center text-center pt-4 mt-4";
-    session.id  = 'profile-container';
+    // Create a section element to contain profiles
+    const section = document.createElement('div');
+    section.className = "row justify-content-center align-items-center text-center pt-4 mt-4";
+    section.id  = 'profile-container';
 
     // Iterate through each profile and create profile elements
     profiles.forEach(profile => {
@@ -35,9 +35,9 @@ const renderProfiles = (profiles) => {
         profileDiv.appendChild(button);
         profileDiv.appendChild(nameProfile);
 
-        session.appendChild(profileDiv);
+        section.appendChild(profileDiv);
     });
 
-    // Append the session containing profiles to the main container
-    container.appendChild(session);
+    // Append the section containing profiles to the main container
+    container.appendChild(section);
 }

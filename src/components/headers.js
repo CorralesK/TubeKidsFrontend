@@ -1,14 +1,14 @@
 const container = document.getElementById('container');
 
 /**
- * Renders a session with a title and an optional message.
- * @param {string} title - Title of the session.
+ * Renders a section with a title and an optional message.
+ * @param {string} title - Title of the section.
  */
 const renderHeader = (title) => {
-    // Create a session element for the header
-    const session = document.createElement('div');
-    session.className = "row justify-content-center align-items-center text-center pt-5 mt-5";
-    session.id = "headerSession";
+    // Create a section element for the header
+    const section = document.createElement('div');
+    section.className = "row justify-content-center align-items-center text-center pt-5 mt-5";
+    section.id = "headerSection";
 
     // Create an inner div for the content
     const innerDiv = document.createElement('div');
@@ -17,7 +17,7 @@ const renderHeader = (title) => {
     // Create title element and add it to inner div
     const titleSession = document.createElement('h2');
     titleSession.textContent = title;
-    titleSession.id  = 'sessionTitle';
+    titleSession.id  = 'sectionTitle';
     innerDiv.appendChild(titleSession);
 
     // Create message paragraph if applicable and add it to inner div
@@ -27,9 +27,9 @@ const renderHeader = (title) => {
     messageParagraph.style.display = 'none';
     innerDiv.appendChild(messageParagraph);
 
-    // Append inner div to session
-    session.appendChild(innerDiv);
+    // Append inner div to section
+    section.appendChild(innerDiv);
 
-    // Append session to the main container
-    container.appendChild(session);
+    // Append section to the main container
+    container.appendChild(section);
 }

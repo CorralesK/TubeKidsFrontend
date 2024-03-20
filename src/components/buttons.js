@@ -39,7 +39,7 @@ const renderEditDeleteButtons = (id) => {
     // Create Edit Button
     const editButton = document.createElement('button');
     editButton.type = 'button';
-    editButton.className = 'btn btn-dark edit-btn me-1';
+    editButton.className = 'btn btn-outline-info edit-btn me-1';
     editButton.setAttribute('data-bs-toggle', 'tooltip');
     editButton.setAttribute('data-bs-placement', 'top');
     editButton.setAttribute('data-bs-title', 'Editar');
@@ -60,7 +60,7 @@ const renderEditDeleteButtons = (id) => {
     // Create Delete Button (similarly)
     const deleteButton = document.createElement('button');
     deleteButton.type = 'button';
-    deleteButton.className = 'btn btn-dark delete-btn';
+    deleteButton.className = 'btn btn-outline-danger delete-btn';
     deleteButton.setAttribute('data-bs-toggle', 'tooltip');
     deleteButton.setAttribute('data-bs-placement', 'top');
     deleteButton.setAttribute('data-bs-title', 'Eliminar');
@@ -114,7 +114,7 @@ const renderAddProfileButton = () => {
 
     //Create button
     const button = document.createElement('a');
-    button.className = "btn btn-dark add-btn mb-1 pt-1";
+    button.className = "btn btn-outline-success add-btn mb-1 pt-1";
     button.href = "http://127.0.0.1:5500/html/index.html?c=f";
     button.setAttribute('data-bs-toggle', 'tooltip');
     button.setAttribute('data-bs-placement', 'top');
@@ -126,7 +126,7 @@ const renderAddProfileButton = () => {
     icon.setAttribute('height', '100');
     icon.setAttribute('fill', 'currentColor');
     icon.setAttribute('viewBox', '0 0 16 16');
-    icon.classList.add('bi', 'bi-plus-square-fill', 'text-secondary', 'mb-4');
+    icon.classList.add('bi', 'bi-plus-square-fill', 'mb-4');
 
     const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     iconPath.setAttribute('d', "M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z");

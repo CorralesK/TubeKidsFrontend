@@ -5,6 +5,15 @@ const renderNavManager = () => {
     const navElement = document.createElement('ul');
     navElement.classList.add('nav', 'col-lg-auto', 'me-lg-auto', 'justify-content-center');
 
+    // Create inicio link
+    const homeLink = document.createElement('a');
+    homeLink.href = 'http://127.0.0.1:5500/html/index.html?c=1';
+    homeLink.classList.add('nav-link', 'px-2', 'link-light');
+    homeLink.textContent = 'Inicio';
+
+    const homeListItem = document.createElement('li');
+    homeListItem.appendChild(homeLink);
+
     // Create video link
     const videoLink = document.createElement('a');
     videoLink.href = 'http://127.0.0.1:5500/html/videos/playlist.html?c=v';
@@ -24,6 +33,7 @@ const renderNavManager = () => {
     profileListItem.appendChild(profileLink);
 
     // Add list items to navigation
+    navElement.appendChild(homeListItem);
     navElement.appendChild(videoListItem);
     navElement.appendChild(profileListItem);
 
